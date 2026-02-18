@@ -23,3 +23,23 @@ In this project, we are using 2022 League of Legends data to predict game time l
 
 
 ---
+
+## Framing a Prediction Problem
+
+
+---
+
+## Baseline Model
+
+
+---
+
+## Final Model
+
+
+---
+
+## Fairness Analysis
+
+
+---
