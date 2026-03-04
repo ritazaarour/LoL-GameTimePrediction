@@ -121,17 +121,33 @@ For readers of this website, this project illustrates how **raw gameplay data ca
 ---
 
 ## Hypothesis Testing
+#### **Question of Interest**
+> **Which competitive region has the highest win rate against teams outside their region?**
 
+In the professional **League of Legends** ecosystem, regional identity is a source of pride and often cited by fans and players alike as a real driver of competitive success on the world stage. This analysis seeks to move beyond anecdotal "power rankings" by determining if a team's **home region** is a statistically significant predictor of their win rate in cross-region matches.
+
+By isolating **535 international clashes** from the 2022 season, we test the null hypothesis that all regions possess an **equal probability of victory**. Establishing whether these performance gaps are statistically **"real"** allows us to identify the true hierarchy of global play and determine if the **"gap"** between the East and West (or maybe even between powerhouse regions like China and Korea) is supported by the data.
+
+---
+
+#### **Hypothesis Framework**
+
+* **Null Hypothesis ($H_0$):** The probability of winning a cross-region match is independent of a team's home region.
+* **Alternative Hypothesis ($H_a$):** The probability of winning a cross-region match depends on a team's home region.
+* **Test-Statistic:** **Chi-Square Statistic ($\chi^2$)**
+    * *Rationale:* We are testing the association between two **categorical variables** (Home Region and Match Result).
 
 ---
 
 ## Framing a Prediction Problem
+We are solving a **multiclass classification** task where we predict a player's position (top, jng, mid, bot, sup) based on their post-game statistics. We chose **position** as our target variable because each position has a relatively different gaming style that is reflected in their post-game stats.
 
+We evaluate our model using **accuracy, precision, recall, and F1-score** together. _Accuracy_ gives us an overall measure of correctness and is appropriate here since the five positions are perfectly balanced in the dataset. We also report _precision, recall, and F1-score_ on a per-role basis. This allows us to identify which specific positions the model struggles to classify and where it performs well, giving us a more complete picture of model performance than any single metric alone.
 
 ---
 
 ## Baseline Model
-Our prediction task is a **multiclass classification** problem where we predict a player's position (top, jng, mid, bot, sup) based on their post-game statistics. Our baseline model is a Logistic Regression classifier implemented in a single sklearn Pipeline. Missing values were filled with the column mean before training. We used 96 quantitative features and 1 nominal feature out of 165 features total. A StandardScaler was applied to the quantitative features and the nominal feature was OneHotEncoded. The model achieved 93.52% accuracy on the test set. Per-role, jungle and support were classified nearly perfectly (F1 ≈ 1.00) due to their highly distinct stat profiles, while bot was also classified strongly (F1 ≈ 0.96). Mid and top were the hardest to distinguish (F1 ≈ 0.86) as they share similar statistics.
+Our baseline model is a **Logistic Regression classifier** implemented in a single sklearn Pipeline. Missing values were filled with the column mean before training. We used 84 quantitative features and 1 nominal feature out of 165 features total. A StandardScaler was applied to the quantitative features and the nominal feature was OneHotEncoded. The model achieved 93.52% accuracy on the test set. Per-role, jungle and support were classified nearly perfectly (F1 ≈ 1.00) due to their highly distinct stat profiles, while bot was also classified strongly (F1 ≈ 0.96). Mid and top were the hardest to distinguish (F1 ≈ 0.86) as they share similar statistics.
 
 For our final model, we aim to improve our baseline model by switching from a Logistic Regression to a Random Forest Classifier which captures non-linear relationships between features that Logistic Regression cannot. We will also perform hyperparameter tuning using a GridSearch to find the best hyperparameters for the model. 
 
