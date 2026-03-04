@@ -9,7 +9,14 @@ This project uses a **League of Legends match dataset at the player level**, whe
 
 League of Legends is a **role‑based game**, where each position (Top, Jungle, Mid, Bottom, Support) serves a distinct strategic purpose. While players select a role before the match begins, their **in‑game behavior and statistics** may tell a more nuanced story about the position they actually played.
 
-**Our Question:** Can we classify a player’s position (Top, Jungle, Mid, Bottom, Support) using only their in‑game statistics?
+**Our Question:** _Can we classify a player’s position (Top, Jungle, Mid, Bottom, Support) using only their in‑game statistics?_
+
+This question has clear **machine learning relevance**, as it represents a real‑world **multiclass classification problem** using structured numerical data. It allows us to demonstrate **feature engineering, classification techniques, and model evaluation** using a popular game with rich and interpretable data.
+
+For readers of this website, this project illustrates how **raw gameplay data can be transformed into meaningful insights** about player behavior and team dynamics.
+
+### Dataset Summary
+124,150 rows and 165 columns
 
 ### Relevant Coulmns and Their Descriptions.
 
