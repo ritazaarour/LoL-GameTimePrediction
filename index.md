@@ -131,7 +131,9 @@ For readers of this website, this project illustrates how **raw gameplay data ca
 ---
 
 ## Baseline Model
+Our prediction task is a **multiclass classification** problem where we predict a player's position (top, jng, mid, bot, sup) based on their post-game statistics. Our baseline model is a Logistic Regression classifier implemented in a single sklearn Pipeline. Missing values were filled with the column mean before training. We used 96 quantitative features and 1 nominal feature out of 165 features total. A StandardScaler was applied to the quantitative features and the nominal feature was OneHotEncoded. The model achieved 93.52% accuracy on the test set. Per-role, jungle and support were classified nearly perfectly (F1 ≈ 1.00) due to their highly distinct stat profiles, while bot was also classified strongly (F1 ≈ 0.96). Mid and top were the hardest to distinguish (F1 ≈ 0.86) as they share similar statistics.
 
+For our final model, we aim to improve our baseline model by switching from a Logistic Regression to a Random Forest Classifier which captures non-linear relationships between features that Logistic Regression cannot. We will also perform hyperparameter tuning using a GridSearch to find the best hyperparameters for the model. 
 
 ---
 
