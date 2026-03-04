@@ -13,6 +13,7 @@ League of Legends is a **role‑based game**, where each position (Top, Jungle, 
 
 <details>
 <summary>Relevant Coulmns and Their Descriptions. Click to expand ⬇️ </summary>
+
 | Column Name | Description |
 |------------|------------|
 | `position` | The role played by the user in the match (Top, Jungle, Mid, Bottom, Support). This is the **target variable**. |
@@ -99,6 +100,7 @@ League of Legends is a **role‑based game**, where each position (Top, Jungle, 
 | `opp_killsat25` | Lane opponent's kills at 25 minutes. |
 | `opp_assistsat25` | Lane opponent's assists at 25 minutes. |
 | `opp_deathsat25` | Lane opponent's deaths at 25 minutes. |
+
 </details>
 
 ---
