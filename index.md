@@ -12,6 +12,7 @@ League of Legends is a **role‑based game**, where each position (Top, Jungle, 
 **Our Question:** Can we classify a player’s position (Top, Jungle, Mid, Bottom, Support) using only their in‑game statistics?
 
 ### Relevant Coulmns and Their Descriptions.
+
 | Column Name | Description |
 |------------|------------|
 | `position` | The role played by the user in the match (Top, Jungle, Mid, Bottom, Support). This is the **target variable**. |
