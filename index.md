@@ -128,7 +128,7 @@ For readers of this website, this project illustrates how **raw gameplay data ca
 - void_grubs / opp_void_grubs (~99% missing) — same logic; patch-gated mechanic.
 - dragons (type unknown) (~97% missing) — missing because the dragon type is known; the specific drake columns are used instead. The missingness is the value.
 
-###### url is a MAR/NMAR hybrid — it varies by league (MAR), but leagues without VOD policies will structurally never have one regardless of any other feature (NMAR).
+##### url is a MAR/NMAR hybrid — it varies by league (MAR), but leagues without VOD policies will structurally never have one regardless of any other feature (NMAR).
 Bottom line: MCAR is broadly rejected. Restrict analysis to datacompleteness = "complete" rows when the full feature set is needed, always stratify imputation by position, and treat patch-gated columns as binary indicator features rather than data gaps.
 ---
 
