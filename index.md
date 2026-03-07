@@ -117,8 +117,19 @@ For readers of this website, this project illustrates how **raw gameplay data ca
 ---
 
 ## Assessment of Missingness
+#### Most missingness in this dataset is MAR, driven by two structural features:
 
+- position — ~120 columns are team-level stats only populated on position = "team" rows; they're null by design for all 10 player rows per game.
+- datacompleteness — rows flagged "partial" are systematically missing large blocks of advanced stats. Since both drivers are observed columns, the missingness they cause is fully explainable (MAR) and safe for conditional imputation.
 
+##### Three column groups are NMAR and should never be imputed:
+
+- atakhans / opp_atakhans (100% missing) — the objective didn't exist in 2022; absence encodes game version.
+- void_grubs / opp_void_grubs (~99% missing) — same logic; patch-gated mechanic.
+- dragons (type unknown) (~97% missing) — missing because the dragon type is known; the specific drake columns are used instead. The missingness is the value.
+
+###### url is a MAR/NMAR hybrid — it varies by league (MAR), but leagues without VOD policies will structurally never have one regardless of any other feature (NMAR).
+Bottom line: MCAR is broadly rejected. Restrict analysis to datacompleteness = "complete" rows when the full feature set is needed, always stratify imputation by position, and treat patch-gated columns as binary indicator features rather than data gaps.
 ---
 
 ## Hypothesis Testing
