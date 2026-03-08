@@ -117,19 +117,28 @@ For readers of this website, this project illustrates how **raw gameplay data ca
 ---
 
 ## Assessment of Missingness
-#### Most missingness in this dataset is MAR, driven by two structural features:
+#### State whether you believe there is a column in your dataset that is NMAR. Explain your reasoning and any additional data you might want to obtain that could explain the missingness (thereby making it MAR). Make sure to explicitly use the term “NMAR.”
 
-- position — ~120 columns are team-level stats only populated on position = "team" rows; they're null by design for all 10 player rows per game.
-- datacompleteness — rows flagged "partial" are systematically missing large blocks of advanced stats. Since both drivers are observed columns, the missingness they cause is fully explainable (MAR) and safe for conditional imputation.
+### Yes — the url column is NMAR.
 
-##### Three column groups are NMAR and should never be imputed:
+-- The url column (missing ~87% of rows) contains links to match VODs. While its missingness correlates with league (some leagues have urls more than others), this correlation alone does not make it MAR. The missingness is ultimately driven by an unobserved variable — whether a league or tournament organizer has a VOD publication policy — which is not captured anywhere in the dataset. The absence of a url is informative about the value itself: a match without a url is one that was never recorded or published, and that fact is tied to something inherent about the match (its league's media infrastructure), not just to observed columns. This makes url NMAR.
 
-- atakhans / opp_atakhans (100% missing) — the objective didn't exist in 2022; absence encodes game version.
-- void_grubs / opp_void_grubs (~99% missing) — same logic; patch-gated mechanic.
-- dragons (type unknown) (~97% missing) — missing because the dragon type is known; the specific drake columns are used instead. The missingness is the value.
+-- To make this MAR, additional data that could explain the missingness includes:
 
-##### url is a MAR/NMAR hybrid — it varies by league (MAR), but leagues without VOD policies will structurally never have one regardless of any other feature (NMAR).
-Bottom line: MCAR is broadly rejected. Restrict analysis to datacompleteness = "complete" rows when the full feature set is needed, always stratify imputation by position, and treat patch-gated columns as binary indicator features rather than data gaps.
+- League media policy data — a column indicating whether each league officially publishes VODs (yes/no). If missingness is fully explained by this flag, it becomes MAR.
+- Tournament tier/region — a structured classification of leagues by region and competitive tier (e.g., major vs. minor region), which may proxy for VOD availability.
+- Broadcast platform — knowing whether a match was streamed on Twitch, YouTube, or a regional platform (or not at all) would directly explain why no url exists.
+
+-- If any of these variables were added to the dataset and fully accounted for the missingness pattern in url, the mechanism would shift from NMAR to MAR — because the missingness would then be explainable by observed data rather than the unrecorded value itself.  
+
+##### Present and interpret the results of your missingness permutation tests with respect to your data and question. Embed a plotly plot related to your missingness exploration; ideas include:
+• The distribution of column 
+ when column    is missing and the distribution of column    when column 
+ is not missing, as was done in Lecture 8.
+• The empirical distribution of the test statistic used in one of your permutation tests, along with the observed statistic.
+
+WIP -- ritesh
+
 ---
 
 ## Hypothesis Testing
