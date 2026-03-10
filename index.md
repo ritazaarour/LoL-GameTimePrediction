@@ -113,6 +113,12 @@ For readers of this website, this project illustrates how **raw gameplay data ca
 
 ## Data Cleaning and EDA
 
+![Distribution of Kills by Position](Dist%20of%20Kills%20by%20Position.png)
+The distribution of kills per player in League of Legends is right-skewed, with most players recording relatively low kill counts and a small number of high-performing players producing a long right tail of extreme values. The distributions are similar by position, with the exception of the Support position which has a much higher frequency of low kill values. The differences in kills by position indicates that this might be a good feature for our classification problem.
+
+![Win Rate by Region](Win%20Rate%20by%20Region.png)
+The plot demonstrates a strong regional imbalance in League of Legends esports, with Korea and China achieving dominant win rates well above 50%, while most minor regions fall significantly below the global average when competing internationally.
+
 
 ---
 
