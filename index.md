@@ -226,7 +226,7 @@ The heatmap below shows low recall for the Mid position in the region of China.
 <img src="recall_heatmap.png" alt="Recall Heatmap by Region and Position" width="700">
 
 
-To validate that the different in model performance by region is statistically significant, we tested two sets of hypotheses.
+To validate that the difference in model performance by region is statistically significant, we tested two sets of hypotheses.
 
 * **Null Hypothesis ($H_0$):** The Accuracy of our model is consistent across regions.
 * **Alternative Hypothesis ($H_a$):** The accuracy of our model is inconsistent for at least one region.
