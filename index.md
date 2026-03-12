@@ -113,8 +113,7 @@ For readers of this website, this project illustrates how **raw gameplay data ca
 
 ## Data Cleaning and EDA
 
-![Distribution of Kills by Position]
-<iframe src="kills_position.html" width="800" height="500" frameborder="0"></iframe>
+<iframe src="kills_position.html" width="1000" height="800" frameborder="0"></iframe>
 The distribution of kills per player in League of Legends is right-skewed, with most players recording relatively low kill counts and a small number of high-performing players producing a long right tail of extreme values. The distributions are similar by position, with the exception of the Support position which has a much higher frequency of low kill values. The differences in kills by position indicates that this might be a good feature for our classification problem.
 
 ![Win Rate by Region](Win%20Rate%20by%20Region.png)
