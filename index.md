@@ -125,7 +125,7 @@ The plot demonstrates a strong regional imbalance in League of Legends esports, 
 ## Assessment of Missingness
 #### State whether you believe there is a column in your dataset that is NMAR. Explain your reasoning and any additional data you might want to obtain that could explain the missingness (thereby making it MAR). Make sure to explicitly use the term “NMAR.”
 
-### Yes — the url column is NMAR.
+#### Yes — the url column is NMAR.
 
 The url column (missing ~87% of rows) contains links to match VODs. While its missingness correlates with league (some leagues have urls more than others), this correlation alone does not make it MAR. The missingness is ultimately driven by an unobserved variable — whether a league or tournament organizer has a VOD publication policy — which is not captured anywhere in the dataset. The absence of a url is informative about the value itself: a match without a url is one that was never recorded or published, and that fact is tied to something inherent about the match (its league's media infrastructure), not just to observed columns. This makes url NMAR.
 
@@ -137,10 +137,8 @@ To make this MAR, additional data that could explain the missingness includes:
 
 If any of these variables were added to the dataset and fully accounted for the missingness pattern in url, the mechanism would shift from NMAR to MAR — because the missingness would then be explainable by observed data rather than the unrecorded value itself.  
 
-##### Present and interpret the results of your missingness permutation tests with respect to your data and question. Embed a plotly plot related to your missingness exploration; ideas include:
-• The distribution of column 
- when column    is missing and the distribution of column    when column 
- is not missing, as was done in Lecture 8.
+#### Present and interpret the results of your missingness permutation tests with respect to your data and question. Embed a plotly plot related to your missingness exploration; ideas include:
+• The distribution of column when column is missing and the distribution of column when column is not missing, as was done in Lecture 8.
 • The empirical distribution of the test statistic used in one of your permutation tests, along with the observed statistic.
 
 From our permutation test, we found that the missing values in the url column do not appear to occur completely at random. When we compared the distribution of game length for matches where the url value is missing versus when it is present, we noticed that the two groups show different patterns. The observed difference in our test statistic was larger than what we typically saw in the permutation distribution under the null hypothesis. Because of this, the resulting p-value was small, which led us to reject the null hypothesis that missingness in the url column is independent of game characteristics.
