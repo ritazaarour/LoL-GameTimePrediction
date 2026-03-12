@@ -187,6 +187,58 @@ For our final model we switched to a **Random Forest Classifier** and engineered
 ---
 
 ## Fairness Analysis
+Does the model perform equally well for players from different regions?
 
+Performance Metrics by Region
+
+The table below displays the Accuracy, Macro Recall and Macro Precision by Region, giving us an indication of how well our model performs on the whole at a Region level.
+
+| Region           | Accuracy | Macro Recall | Macro Precision |
+|------------------|----------|--------------|-----------------|
+| China            | 0.834281 | 0.835914     | 0.833810        |
+| International    | 0.922314 | 0.924671     | 0.924221        |
+| Oceania          | 0.922907 | 0.922845     | 0.928986        |
+| CIS              | 0.925272 | 0.926887     | 0.925752        |
+| Asia-Pacific     | 0.943631 | 0.945978     | 0.945328        |
+| Latin America    | 0.950761 | 0.950258     | 0.950831        |
+| Brazil           | 0.955255 | 0.955981     | 0.957214        |
+| Europe           | 0.957059 | 0.957202     | 0.957389        |
+| Turkey           | 0.957659 | 0.956691     | 0.956607        |
+| Vietnam          | 0.957831 | 0.957303     | 0.957523        |
+| North America    | 0.961654 | 0.960980     | 0.960985        |
+| Korea            | 0.963050 | 0.962087     | 0.963492        |
+| Japan            | 0.964876 | 0.964290     | 0.964149        |
+
+Accuracy gap: 0.1306
+Macro Recall gap: 0.1284
+
+The Accuracy gap of 0.1306 and Macro Recall gap of 0.1284 indicate that the model performs differently depending on region.
+
+This is further demonstrated at a position level in the following graph, where we can see the recall gap is particularly large for the Mid position.
+![Regional Recall Gap by Position](regional_recall_gap_by_position.png)
+
+The heatmap below shows low recall for the Mid position in the region of China.
+![Recall Heatmap by Region and Position](recall_heatmap.png)
+
+To validate that the different in model performance by region is statistically significant, we tested two sets of hypotheses.
+
+* **Null Hypothesis ($H_0$):** The Accuracy of our model is consistent across regions.
+* **Alternative Hypothesis ($H_a$):** The accuracy of our model is inconsistent for at least one region.
+* **Test-Statistic:** **Chi-Square Statistic ($\chi^2$)**
+
+Chi-square statistic: 765.7712905863178
+p-value: 3.603585165703335e-156
+
+* **Null Hypothesis ($H_0$):** The Accuracy of our model is consistent across regions for the Mid position in particular.
+* **Alternative Hypothesis ($H_a$):** The accuracy of our model is inconsistent at predicting the Mid position for at least one region.
+* **Test-Statistic:** **Chi-Square Statistic ($\chi^2$)**
+
+Mid Recall Chi-square: 523.3821469340835
+Mid Recall p-value: 2.3287323370630366e-104
+
+Both p-values are well below a threshold of 0.05, so we reject both null hypotheses.
+
+#### Fairness Conclusion
+Although overall regional performance disparities exist, the fairness issue is highly concentrated in the Mid role, which exhibits a recall disparity of 36.8 percentage points across regions. In contrast, Jungle and Support are relatively stable, suggesting that the model’s fairness issues are role-specific rather than universally distributed. The differences in overall recall and recall for the Mid position are statistically significant.
 
 ---
