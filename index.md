@@ -1,4 +1,4 @@
-# Predicting Game Time Length on League of Legends Data
+# Classifying Player Positions Using Post‑Game Statistics in League of Legends
 
 by: Cameron Hensley, Ritesh Saxena, Angela Watson, Rita Zaarour
 
@@ -187,9 +187,11 @@ For our final model we switched to a **Random Forest Classifier** and engineered
 ---
 
 ## Fairness Analysis
-Does the model perform equally well for players from different regions?
 
-Performance Metrics by Region
+#### **Fairness Question**
+> Does the model perform equally well for players from different regions?
+
+### Performance Metrics by Region
 
 The table below displays the Accuracy, Macro Recall and Macro Precision by Region, giving us an indication of how well our model performs on the whole at a Region level.
 
@@ -215,10 +217,12 @@ Macro Recall gap: 0.1284
 The Accuracy gap of 0.1306 and Macro Recall gap of 0.1284 indicate that the model performs differently depending on region.
 
 This is further demonstrated at a position level in the following graph, where we can see the recall gap is particularly large for the Mid position.
+
 ![Regional Recall Gap by Position](regional_recall_gap_by_position.png)
 
 The heatmap below shows low recall for the Mid position in the region of China.
-![Recall Heatmap by Region and Position](recall_heatmap.png)
+
+<img src="recall_heatmap.png" alt="Recall Heatmap by Region and Position" width="700">
 
 To validate that the different in model performance by region is statistically significant, we tested two sets of hypotheses.
 
