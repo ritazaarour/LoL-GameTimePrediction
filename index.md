@@ -218,11 +218,13 @@ The Accuracy gap of 0.1306 and Macro Recall gap of 0.1284 indicate that the mode
 
 This is further demonstrated at a position level in the following graph, where we can see the recall gap is particularly large for the Mid position.
 
-![Regional Recall Gap by Position](regional_recall_gap_by_position.png)
+<img src="regional_recall_gap_by_position.png" alt="Regional Recall Gap by Position" width="700">
+
 
 The heatmap below shows low recall for the Mid position in the region of China.
 
 <img src="recall_heatmap.png" alt="Recall Heatmap by Region and Position" width="700">
+
 
 To validate that the different in model performance by region is statistically significant, we tested two sets of hypotheses.
 
