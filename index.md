@@ -186,6 +186,15 @@ The model achieved **93.52% accuracy** on the test set. Per-role, jungle and sup
 ## Final Model
 For our final model we switched to a **Random Forest Classifier** and engineered two new features on top of the existing 85 quantitative and 1 nominal features:
 
+* ['kda_ratio'] = (kills + assists) / (deaths + 1): This captures a player's combat contribution relative to their deaths. Bot and mid laners tend to have high KDA ratios since they are expected to deal damage while avoiding death, whereas top laners have lower ratios since they often absorb damage for the team.
+* ['damage_taken_ratio'] = damagetakenperminute / (dpm + 1): This captures how much damage a player absorbs relative to how much they deal. Top laners playing tanks and fighters take significantly more damage relative to their output compared to mid laners who deal high damage while avoiding hits.
+
+These features were chosen to specifically target the mid/top confusion observed in the baseline model, where both roles had the lowest F1-scores (≈ 0.86).
+
+We tuned two hyperparameters using **GridSearchCV** with 5-fold cross validation:
+
+* **n_estimators** (300, 500): Controls the number of trees. More trees improves stability and reduces variance in predictions.
+* **max_depth** (None): Allows trees to grow fully, letting the model learn complex patterns in the data.
 
 ---
 
