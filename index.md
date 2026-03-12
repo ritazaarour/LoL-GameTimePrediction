@@ -143,7 +143,11 @@ If any of these variables were added to the dataset and fully accounted for the 
  is not missing, as was done in Lecture 8.
 • The empirical distribution of the test statistic used in one of your permutation tests, along with the observed statistic.
 
-WIP -- ritesh
+From our permutation test, we found that the missing values in the url column do not appear to occur completely at random. When we compared the distribution of game length for matches where the url value is missing versus when it is present, we noticed that the two groups show different patterns. The observed difference in our test statistic was larger than what we typically saw in the permutation distribution under the null hypothesis. Because of this, the resulting p-value was small, which led us to reject the null hypothesis that missingness in the url column is independent of game characteristics.
+
+In simpler terms, this suggests that whether the url value is missing may be related to other variables in the dataset rather than happening randomly. This means the missingness is likely closer to Missing at Random (MAR) instead of Missing Completely at Random (MCAR). This is important for our project because it tells us that we should be careful when handling missing values. If we simply drop rows with missing values, we might unintentionally introduce bias into our analysis. Understanding the pattern of missingness helps us make better decisions about how to handle the data as we continue exploring regional performance and building our prediction models.
+
+<img src="missingness.png" alt="Regional Recall Gap by Position" width="700">
 
 ---
 
