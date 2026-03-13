@@ -123,9 +123,6 @@ The plot demonstrates a strong regional imbalance in League of Legends esports, 
 ---
 
 ## Assessment of Missingness
-#### State whether you believe there is a column in your dataset that is NMAR. Explain your reasoning and any additional data you might want to obtain that could explain the missingness (thereby making it MAR). Make sure to explicitly use the term “NMAR.”
-
-#### Yes — the url column is NMAR.
 
 The url column (missing ~87% of rows) contains links to match VODs. While its missingness correlates with league (some leagues have urls more than others), this correlation alone does not make it MAR. The missingness is ultimately driven by an unobserved variable — whether a league or tournament organizer has a VOD publication policy — which is not captured anywhere in the dataset. The absence of a url is informative about the value itself: a match without a url is one that was never recorded or published, and that fact is tied to something inherent about the match (its league's media infrastructure), not just to observed columns. This makes url NMAR.
 
@@ -136,11 +133,6 @@ To make this MAR, additional data that could explain the missingness includes:
 - Broadcast platform — knowing whether a match was streamed on Twitch, YouTube, or a regional platform (or not at all) would directly explain why no url exists.
 
 If any of these variables were added to the dataset and fully accounted for the missingness pattern in url, the mechanism would shift from NMAR to MAR — because the missingness would then be explainable by observed data rather than the unrecorded value itself.  
-
-#### Present and interpret the results of your missingness permutation tests with respect to your data and question. Embed a plotly plot related to your missingness exploration; ideas include:
-
-• The distribution of column when column is missing and the distribution of column when column is not missing, as was done in Lecture 8.
-• The empirical distribution of the test statistic used in one of your permutation tests, along with the observed statistic.
 
 From our permutation test, we found that the missing values in the url column do not appear to occur completely at random. When we compared the distribution of game length for matches where the url value is missing versus when it is present, we noticed that the two groups show different patterns. The observed difference in our test statistic was larger than what we typically saw in the permutation distribution under the null hypothesis. Because of this, the resulting p-value was small, which led us to reject the null hypothesis that missingness in the url column is independent of game characteristics.
 
@@ -162,9 +154,9 @@ By isolating **535 international clashes** from the 2022 season, we test the nul
 
 #### **Hypothesis Framework**
 
-* **Null Hypothesis ($H_0$):** The probability of winning a cross-region match is independent of a team's home region.
-* **Alternative Hypothesis ($H_a$):** The probability of winning a cross-region match depends on a team's home region.
-* **Test-Statistic:** **Chi-Square Statistic ($\chi^2$)**
+* **Null Hypothesis:** The probability of winning a cross-region match is independent of a team's home region.
+* **Alternative Hypothesis:** The probability of winning a cross-region match depends on a team's home region.
+* **Test-Statistic:** **Chi-Square Statistic**
     * *Rationale:* We are testing the association between two **categorical variables** (Home Region and Match Result).
 
 ---
@@ -242,9 +234,9 @@ The heatmap below shows low recall for the Mid position in the region of China.
 
 To validate that the difference in model performance by region is statistically significant, we tested two sets of hypotheses.
 
-* **Null Hypothesis ($H_0$):** The Accuracy of our model is consistent across regions.
-* **Alternative Hypothesis ($H_a$):** The accuracy of our model is inconsistent for at least one region.
-* **Test-Statistic:** **Chi-Square Statistic ($\chi^2$)**
+* **Null Hypothesis:** The Accuracy of our model is consistent across regions.
+* **Alternative Hypothesis:** The accuracy of our model is inconsistent for at least one region.
+* **Test-Statistic:** **Chi-Square Statistic**
 
 Chi-square statistic: 765.7712905863178
 p-value: 3.603585165703335e-156
