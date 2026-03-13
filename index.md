@@ -226,12 +226,6 @@ This is further demonstrated at a position level in the following graph, where w
 
 <img src="regional_recall_gap_by_position.png" alt="Regional Recall Gap by Position" width="700">
 
-
-The heatmap below shows low recall for the Mid position in the region of China.
-
-<img src="recall_heatmap.png" alt="Recall Heatmap by Region and Position" width="700">
-
-
 To validate that the difference in model performance by region is statistically significant, we tested two sets of hypotheses.
 
 * **Null Hypothesis:** The Accuracy of our model is consistent across regions.
