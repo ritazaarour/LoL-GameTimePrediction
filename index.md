@@ -232,15 +232,15 @@ To validate that the difference in model performance by region is statistically 
 * **Alternative Hypothesis:** The accuracy of our model is inconsistent for at least one region.
 * **Test-Statistic:** **Chi-Square Statistic**
 
-Chi-square statistic: 765.7712905863178
-p-value: 3.603585165703335e-156
+##### Chi-square statistic: 765.77
+##### p-value: 0.00
 
-* **Null Hypothesis ($H_0$):** The Accuracy of our model is consistent across regions for the Mid position in particular.
-* **Alternative Hypothesis ($H_a$):** The accuracy of our model is inconsistent at predicting the Mid position for at least one region.
-* **Test-Statistic:** **Chi-Square Statistic ($\chi^2$)**
+* **Null Hypothesis:** The Accuracy of our model is consistent across regions for the Mid position in particular.
+* **Alternative Hypothesis:** The accuracy of our model is inconsistent at predicting the Mid position for at least one region.
+* **Test-Statistic:** **Chi-Square Statistic**
 
-Mid Recall Chi-square: 523.3821469340835
-Mid Recall p-value: 2.3287323370630366e-104
+##### Mid Recall Chi-square: 523.38
+##### Mid Recall p-value: 0.00
 
 Both p-values are well below a threshold of 0.05, so we reject both null hypotheses.
 
