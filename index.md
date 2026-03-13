@@ -150,14 +150,50 @@ In the professional **League of Legends** ecosystem, regional identity is a sour
 
 By isolating **535 international clashes** from the 2022 season, we test the null hypothesis that all regions possess an **equal probability of victory**. Establishing whether these performance gaps are statistically **"real"** allows us to identify the true hierarchy of global play and determine if the **"gap"** between the East and West (or maybe even between powerhouse regions like China and Korea) is supported by the data.
 
----
-
 #### **Hypothesis Framework**
 
 * **Null Hypothesis:** The probability of winning a cross-region match is independent of a team's home region.
 * **Alternative Hypothesis:** The probability of winning a cross-region match depends on a team's home region.
 * **Test-Statistic:** **Chi-Square Statistic**
     * *Rationale:* We are testing the association between two **categorical variables** (Home Region and Match Result).
+
+Our Chi-Square test returned a p-value below 0.05, indicating that we should reject the null hypothesis and conclude that region does influence win rate.
+P-value: 0.00
+
+## Bonferroni‑Adjusted Chi‑Square Results
+
+- **Number of pairs:** 78  
+- **Bonferroni‑Adjusted Alpha:** **0.000641**
+
+### Statistically Significant Regional Gaps (Post‑Adjustment)
+
+| Pair | p‑value | Status |
+|---|---:|---|
+| CIS vs China | 1.534821e‑10 | Significant |
+| CIS vs Korea | 6.812126e‑10 | Significant |
+| Japan vs China | 4.768216e‑09 | Significant |
+| Korea vs Japan | 8.627102e‑09 | Significant |
+| CIS vs North America | 4.928379e‑08 | Significant |
+| North America vs Japan | 4.745566e‑07 | Significant |
+| Oceania vs China | 1.143509e‑06 | Significant |
+| Korea vs Oceania | 1.283050e‑06 | Significant |
+| Latin America vs China | 4.461116e‑06 | Significant |
+| Korea vs Latin America | 5.051276e‑06 | Significant |
+| North America vs Oceania | 3.009339e‑05 | Significant |
+| Turkey vs China | 3.493086e‑05 | Significant |
+| Korea vs Turkey | 3.605527e‑05 | Significant |
+| Vietnam vs China | 1.127433e‑04 | Significant |
+| North America vs Latin America | 1.181047e‑04 | Significant |
+| Korea vs Vietnam | 1.330259e‑04 | Significant |
+| Asia‑Pacific vs Japan | 1.446733e‑04 | Significant |
+| Asia‑Pacific vs China | 1.508209e‑04 | Significant |
+| Asia‑Pacific vs CIS | 1.724185e‑04 | Significant |
+| Asia‑Pacific vs Korea | 2.525619e‑04 | Significant |
+| Japan vs Europe | 4.029402e‑04 | Significant |
+| North America vs Turkey | 5.611446e‑04 | Significant |
+
+> **Note:** All listed comparisons meet the Bonferroni‑adjusted significance threshold (*p* < 0.000641).
+
 
 ---
 
