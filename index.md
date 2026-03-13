@@ -226,6 +226,8 @@ This is further demonstrated at a position level in the following graph, where w
 
 <img src="regional_recall_gap_by_position.png" alt="Regional Recall Gap by Position" width="700">
 
+### Testing for Fairness
+
 To validate that the difference in model performance by region is statistically significant, we tested two sets of hypotheses.
 
 * **Null Hypothesis:** The Accuracy of our model is consistent across regions.
@@ -242,7 +244,7 @@ To validate that the difference in model performance by region is statistically 
 ##### Mid Recall Chi-square: 523.38
 ##### Mid Recall p-value: 0.00
 
-Both p-values are well below a threshold of 0.05, so we reject both null hypotheses.
+Both p-values are well below a threshold of 0.05, so we reject both null hypotheses. This means that there is a difference in model performance by region and we reject the null hypothsis. We also see a signficant difference in predictions for the Mid position, so we reject that null hypothesis and conclude that our model performs differently across regions for the Mid position.
 
 #### Fairness Conclusion
 Although overall regional performance disparities exist, the fairness issue is highly concentrated in the Mid role, which exhibits a recall disparity of 36.8 percentage points across regions. In contrast, Jungle and Support are relatively stable, suggesting that the model’s fairness issues are role-specific rather than universally distributed. The differences in overall recall and recall for the Mid position are statistically significant.
