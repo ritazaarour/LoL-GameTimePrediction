@@ -205,9 +205,18 @@ We evaluate our model using **accuracy, precision, recall, and F1-score** togeth
 ---
 
 ## Baseline Model
-Our baseline model is a **Logistic Regression classifier** implemented in a single sklearn Pipeline. Missing values were filled with the column mean before training. We used 85 quantitative features and 1 nominal feature ['side'] out of 165 features total. We did not use any ordinal features. A StandardScaler was applied to the quantitative features and the nominal feature was OneHotEncoded. 
+Our baseline model is a **Logistic Regression classifier** implemented in a single sklearn Pipeline. Missing values were filled with the column mean before training. We used 85 quantitative features and 1 nominal feature ['side'] out of 165 features total. We did not use any ordinal features. A **StandardScaler** was applied to the quantitative features and the nominal feature was **OneHotEncoded**. 
 
-The model achieved **93.52% accuracy** on the test set. Per-role, jungle and support were classified nearly perfectly (F1 ≈ 1.00) due to their highly distinct stat profiles, while bot was also classified strongly (F1 ≈ 0.96). Mid and top were the hardest to distinguish (F1 ≈ 0.86) as they share similar statistics. We believe this is a strong baseline given the natural statistical separation between roles, though there is still room for improvement in distinguishing mid from top. 
+The model achieved **93.52% accuracy** on the test set. Per-role, jungle and support were classified nearly perfectly with precision and recall at or near 1.00 due to their highly distinct stat profiles. Bot achieved a precision of 0.96 and recall of 0.97. Mid and top were the most difficult to distinguish, both achieving F1-scores of 0.86, with mid showing precision of 0.86 and recall of 0.85, and top showing precision of 0.86 and recall of 0.87.  We believe this is a strong baseline given the natural statistical separation between roles, though there is still room for improvement in distinguishing mid from top.
+
+| Position | Precision | Recall | F1-Score | Support |
+|----------|-----------|--------|----------|---------|
+| bot | 0.96 | 0.97 | 0.96 | 4901 |
+| jng | 1.00 | 1.00 | 1.00 | 4991 |
+| mid | 0.86 | 0.85 | 0.85 | 5052 |
+| sup | 1.00 | 0.99 | 0.99 | 4965 |
+| top | 0.86 | 0.87 | 0.87 | 4921 |
+| **accuracy** | | | **0.9352** | **24830** |
 
 ---
 
@@ -219,12 +228,21 @@ For our final model we switched to a **Random Forest Classifier** and engineered
 
 These features were chosen to specifically target the mid/top confusion observed in the baseline model, where both roles had the lowest F1-scores (≈ 0.86).
 
-We tuned two hyperparameters using **GridSearchCV** with 5-fold cross validation:
+We tuned two hyperparameters using GridSearchCV with 5-fold cross validation across 6 candidate combinations:
 
 > * **n_estimators** (100, 200): Controls the number of trees in the forest. More trees improves stability and reduces variance in predictions.
 > * **max_depth** (None, 10, 20): Controls how deep each tree can grow. Unlimited depth allows the model to learn complex patterns while fixed depths act as regularization against overfitting.
 
-The best parameters were n_estimators = 200 and max_depth = None. The final model achieved **93.08% accuracy**. While overall accuracy is comparable to the baseline, the Random Forest showed some improvement in bot recall (0.96 → 0.97) and maintained perfect classification for jungle and support (F1 ≈ 1.00). 
+The best parameters were **n_estimators = 200 and max_depth = None.** The final model achieved **93.08% accuracy**. While overall accuracy is comparable to the baseline, the Random Forest showed some improvement. Jungle and support remained perfectly classified with precision and recall at or near 1.00. Bot showed a slight improvement in recall from 0.96 to 0.97 compared to the baseline. Mid achieved precision of 0.85 and recall of 0.83, and top achieved precision of 0.84 and recall of 0.87.
+
+| Position | Precision | Recall | F1-Score | Support |
+|----------|-----------|--------|----------|---------|
+| bot | 0.96 | 0.97 | 0.97 | 4901 |
+| jng | 1.00 | 1.00 | 1.00 | 4991 |
+| mid | 0.85 | 0.83 | 0.84 | 5052 |
+| sup | 1.00 | 0.99 | 1.00 | 4965 |
+| top | 0.84 | 0.87 | 0.85 | 4921 |
+| **accuracy** | | | **0.9308** | **24830** |
 
 ---
 
