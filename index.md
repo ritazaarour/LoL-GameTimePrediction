@@ -125,22 +125,22 @@ To prepare this information for modeling, we performed a multi-step **Explorator
 By the end of this preprocessing phase, we moved from raw CSV rows to a refined, region-aware dataset ready to help us tackle problems like classifying player roles or predicting match outcomes based on regional trends.
 
 df_players.head()
-|index|gameid|datacompleteness|url|league|year|split|playoffs|date|game|patch|participantid|side|position|playername|playerid|teamname|teamid|firstPick|champion|ban1|
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-|0|ESPORTSTMNT01\_2690210|complete|NaN|LCKC|2022|Spring|0|2022-01-10 07:44:08|1|12\.01|1|Blue|top|Soboro|oe:player:38e0af7278d6769d0c81d7c4b47ac1e|HANJIN BRION Challengers|oe:team:fa3d687a87bcae80362f784a7da571d|1\.0|Renekton|Karma|
-|1|ESPORTSTMNT01\_2690210|complete|NaN|LCKC|2022|Spring|0|2022-01-10 07:44:08|1|12\.01|2|Blue|jng|Raptor|oe:player:637ed20b1e41be1c51bd1a4cb211357|HANJIN BRION Challengers|oe:team:fa3d687a87bcae80362f784a7da571d|1\.0|Xin Zhao|Karma|
-|2|ESPORTSTMNT01\_2690210|complete|NaN|LCKC|2022|Spring|0|2022-01-10 07:44:08|1|12\.01|3|Blue|mid|Feisty|oe:player:d1ae0e2f9f3ac1e0e0cdcb86504ca77|HANJIN BRION Challengers|oe:team:fa3d687a87bcae80362f784a7da571d|1\.0|LeBlanc|Karma|
-|3|ESPORTSTMNT01\_2690210|complete|NaN|LCKC|2022|Spring|0|2022-01-10 07:44:08|1|12\.01|4|Blue|bot|Gamin|oe:player:998b3e49b01ecc41eacc392477a98cf|HANJIN BRION Challengers|oe:team:fa3d687a87bcae80362f784a7da571d|1\.0|Samira|Karma|
-|4|ESPORTSTMNT01\_2690210|complete|NaN|LCKC|2022|Spring|0|2022-01-10 07:44:08|1|12\.01|5|Blue|sup|Loopy|oe:player:e9741b3a238723ea6380ef2113fae63|HANJIN BRION Challengers|oe:team:fa3d687a87bcae80362f784a7da571d|1\.0|Leona|Karma|
+|index|position|side|kills|assists|deaths|total cs|cspm|monsterkillsownjungle|damagetochampions|damageshare|visionscore|controlwardsbought|goldat10|csat10|
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+|0|top|Blue|2|2|3|231\.0|8\.0911|NaN|15768\.0|0\.278784|26\.0|5\.0|3228\.0|89\.0|
+|1|jng|Blue|2|6|5|148\.0|5\.1839|NaN|11765\.0|0\.208009|48\.0|6\.0|3429\.0|58\.0|
+|2|mid|Blue|2|3|2|193\.0|6\.7601|NaN|14258\.0|0\.252086|29\.0|7\.0|3283\.0|81\.0|
+|3|bot|Blue|2|2|4|226\.0|7\.9159|NaN|11106\.0|0\.196358|25\.0|4\.0|3600\.0|78\.0|
+|4|sup|Blue|1|6|5|42\.0|1\.4711|NaN|3663\.0|0\.0647631|69\.0|11\.0|2678\.0|16\.0|
 
 df_cross.head()
-|index|gameid|datacompleteness|url|league|year|split|playoffs|date|game|patch|participantid|side|position|playername|playerid|teamname|teamid|firstPick|champion|ban1|
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-|262|NA1\_4170925713|complete|NaN|PGC|2022|NaN|false|2022-01-10 23:11:51|1|12\.01|100|Blue|team|true|true|Goose Gaming|oe:team:3aad93555aced110c32e285e289128f|true|true|Zoe|
-|263|NA1\_4170925713|complete|NaN|PGC|2022|NaN|false|2022-01-10 23:11:51|1|12\.01|200|Red|team|true|true|Bay State College|oe:team:be543a92f2258b940563996544963c3|true|true|Rumble|
-|274|NA1\_4170707765|complete|NaN|PGC|2022|NaN|false|2022-01-10 23:12:46|1|12\.01|100|Blue|team|true|true|University of California, Irvine|oe:team:d1a3c25be4cdcdb9d51353653b0ea70|true|true|Akali|
-|275|NA1\_4170707765|complete|NaN|PGC|2022|NaN|false|2022-01-10 23:12:46|1|12\.01|200|Red|team|true|true|Team Ambition|oe:team:51eb4ab719043c7abdfca6fdddd1c5c|true|true|Caitlyn|
-|286|NA1\_4171085502|complete|NaN|PGC|2022|NaN|false|2022-01-10 23:14:53|1|12\.01|100|Blue|team|true|true|Grand View University|oe:team:4c87a422072b2c1e754299a17ea36ce|true|true|Rengar|
+|index|gameid|league|teamname|result|region|home\_region|
+|---|---|---|---|---|---|---|
+|262|NA1\_4170925713|PGC|Goose Gaming|false|Asia-Pacific|Asia-Pacific|
+|263|NA1\_4170925713|PGC|Bay State College|true|Asia-Pacific|CIS|
+|274|NA1\_4170707765|PGC|University of California, Irvine|false|Asia-Pacific|CIS|
+|275|NA1\_4170707765|PGC|Team Ambition|true|Asia-Pacific|Asia-Pacific|
+|286|NA1\_4171085502|PGC|Grand View University|false|Asia-Pacific|CIS|
 
 ![Kills by Position](kills_position_new.png)
 The distribution of kills per player in League of Legends is right-skewed, with most players recording relatively low kill counts and a small number of high-performing players producing a long right tail of extreme values. The distributions are similar by position, with the exception of the Support position which has a much higher frequency of low kill values. The differences in kills by position indicates that this might be a good feature for our classification problem.
