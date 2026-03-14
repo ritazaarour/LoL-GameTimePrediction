@@ -124,7 +124,7 @@ To prepare this information for modeling, we performed a multi-step **Explorator
 
 By the end of this preprocessing phase, we moved from raw CSV rows to a refined, region-aware dataset ready to help us tackle problems like classifying player roles or predicting match outcomes based on regional trends.
 
-<iframe src="kills_position.html" width="800" height="500" frameborder="0"></iframe>
+![Kills by Position](kills_position_new.png)
 The distribution of kills per player in League of Legends is right-skewed, with most players recording relatively low kill counts and a small number of high-performing players producing a long right tail of extreme values. The distributions are similar by position, with the exception of the Support position which has a much higher frequency of low kill values. The differences in kills by position indicates that this might be a good feature for our classification problem.
 
 ![Win Rate by Region](Win%20Rate%20by%20Region.png)
