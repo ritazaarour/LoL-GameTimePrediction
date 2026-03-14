@@ -148,10 +148,92 @@ The distribution of kills per player in League of Legends is right-skewed, with 
 ![Win Rate by Region](Win%20Rate%20by%20Region.png)
 The plot demonstrates a strong regional imbalance in League of Legends esports, with Korea and China achieving dominant win rates well above 50%, while most minor regions fall significantly below the global average when competing internationally.
 
+![Average Kills by Position and Region](pivot_table.png)
+This pivot table shows the average number of kills per game for each position across regions. As expected, Supports have the lowest kill averages, while Mid and Bot carry roles have the highest. However, we also observe regional variation within the same position, suggesting that playstyle differences across regions may influence our classification model’s performance and fairness.
 
 ---
 
 ## Assessment of Missingness
+
+Understanding why data are missing is critical before modeling. In this dataset, missingness is largely structural rather than random, driven by patch changes, row type (player vs team), and league recording practices.
+
+NMAR (Not Missing At Random)
+
+A column is NMAR if its missingness depends on the unobserved value itself and cannot be fully explained by observed variables.
+
+Several columns are structurally NMAR:
+
+atakhans, opp_atakhans (100% missing)
+These objectives were introduced in a later patch and did not exist in most 2022 games. Missingness encodes whether the objective existed.
+
+void_grubs, opp_void_grubs (~99% missing)
+Patch‑gated objectives. Missingness reflects game version rather than randomness.
+
+Dragon‑type indicators (~97% missing)
+Missingness occurs precisely when the dragon type is recorded elsewhere — meaning the absence encodes information about the value itself.
+
+url (~87% missing)
+Missingness varies by league and reflects whether a match VOD was published. Because the absence of a URL is tied to an unobserved variable (VOD availability), we classify url as NMAR (or MAR/NMAR hybrid).
+
+If we had an additional column indicating whether a league publishes official VODs, url could potentially become MAR.
+
+Missingness Dependency (MAR Analysis)
+
+We next test whether missingness in certain columns depends on observed variables using permutation tests.
+
+Column Under Investigation: turretplates
+
+This column has substantial missingness (~86%), making it appropriate for dependency analysis.
+
+Case 1: Dependency on Game Length
+
+We test whether missingness of turretplates depends on gamelength.
+
+Null Hypothesis (H₀): Missingness of turretplates is independent of gamelength.
+Alternative Hypothesis (H₁): Missingness depends on gamelength.
+Test Statistic: Difference in mean game length between rows where turretplates is missing vs present.
+Significance Level: α = 0.05
+Method: 1000‑permutation test.
+The observed difference in mean game length was larger than most values in the permutation distribution, producing a p‑value < 0.05.
+
+We reject the null hypothesis and conclude that missingness in turretplates depends on game length.
+
+This provides evidence that turretplates is Missing At Random (MAR) with respect to observed variables.
+
+Case 2: No Dependency on Side
+
+We also tested whether missingness of turretplates depends on side (Blue vs Red).
+
+Null Hypothesis (H₀): Missingness of turretplates is independent of side.
+Alternative Hypothesis (H₁): Missingness depends on side.
+Test Statistic: Difference in missing proportions between sides.
+Significance Level: α = 0.05
+Method: Permutation test.
+In this case, the p‑value exceeded 0.05, and we failed to reject the null hypothesis.
+
+There is no evidence that missingness depends on side.
+
+This demonstrates that missingness is not universally dependent on all observed variables, but rather specific structural factors.
+
+Structural MAR: Player vs Team Rows
+
+Many high‑missingness columns (e.g., monsterkillsownjungle, elementaldrakes, draft pick columns) are recorded only for position == 'team' rows. Their missingness is fully explained by row type, which is captured by observed variables.
+
+These columns are therefore MAR, not MCAR.
+
+Conclusion
+
+Missingness in this dataset is largely:
+
+Structural NMAR (patch‑gated objectives, dragon types)
+MAR driven by row type and game characteristics
+Not consistent with MCAR
+Understanding these mechanisms allowed us to:
+
+Exclude purely structural columns from modeling
+Avoid inappropriate row deletion
+Interpret model results without bias introduced by systematic missingness
+
 
 The url column (missing ~87% of rows) contains links to match VODs. While its missingness correlates with league (some leagues have urls more than others), this correlation alone does not make it MAR. The missingness is ultimately driven by an unobserved variable — whether a league or tournament organizer has a VOD publication policy — which is not captured anywhere in the dataset. The absence of a url is informative about the value itself: a match without a url is one that was never recorded or published, and that fact is tied to something inherent about the match (its league's media infrastructure), not just to observed columns. This makes url NMAR.
 
