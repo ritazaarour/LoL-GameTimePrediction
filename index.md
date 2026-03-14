@@ -3,7 +3,7 @@
 by: Cameron Hensley, Ritesh Saxena, Angela Watson, Rita Zaarour
 
 
-## Introduction
+## Introduction - Exploring the Rift
 
 This project uses a **League of Legends match dataset at the player level**, where each row represents **one player’s performance in a single game**. The dataset captures in‑game statistics such as combat performance, resource generation, damage output, gold income, and objective participation. Together, these metrics describe how a player contributes to their team during a match.
 
@@ -112,6 +112,17 @@ For readers of this website, this project illustrates how **raw gameplay data ca
 ---
 
 ## Data Cleaning and EDA
+
+In this analysis, we explore a comprehensive dataset from the 2022 professional League of Legends season, comprising nearly 150,000 rows of match data. Our goal was to transform a large but difficult-to-interpret dataset into a structured format capable of revealing how different regions and player positions influence the outcome of the game.
+
+To prepare this information for modeling, we performed a multi-step **Exploratory Data Analysis (EDA)** and preprocessing pipeline:
+
+* **Data Segmentation:** The raw data contains both individual player statistics and aggregate team metrics. We decoupled these into two distinct datasets to ensure that player-specific performances (like individual kills) didn't get drowned out by team or match statistics that don’t provide direct predictive insight into our specific questions.
+* **Feature Engineering & Regional Mapping:** Because the dataset identifies matches by league (e.g., LCK, LEC) rather than geography, we implemented a custom mapping logic. By researching the leagues active in 2022 and how the regions were defined, we grouped over 50 unique leagues into 13 global regions (e.g., "Korea," "China," and "Europe"), providing a higher-level view of regional playstyles.
+* **The "International Match" Problem:** A significant challenge was identifying matches where teams from different regions played each other (like at the World Championships). By tracking "home regions" for specific teams, we successfully isolated over 500 "true" cross-region matches. This allowed us to analyze how different local "metas" clash on the global stage and whether specific regions hold a statistical advantage in global play.
+* **Statistical Profiling:** We examined the distribution of key performance indicators, such as player kills. Using univariate analysis, we confirmed that while most players follow a standard performance curve, certain positions—like the support role—exhibit a distinct statistical profile.
+
+By the end of this preprocessing phase, we moved from raw CSV rows to a refined, region-aware dataset ready to help us tackle problems like classifying player roles or predicting match outcomes based on regional trends.
 
 <iframe src="kills_position.html" width="800" height="500" frameborder="0"></iframe>
 The distribution of kills per player in League of Legends is right-skewed, with most players recording relatively low kill counts and a small number of high-performing players producing a long right tail of extreme values. The distributions are similar by position, with the exception of the Support position which has a much higher frequency of low kill values. The differences in kills by position indicates that this might be a good feature for our classification problem.
