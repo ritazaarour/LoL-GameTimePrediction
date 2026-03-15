@@ -148,7 +148,7 @@ The distribution of kills per player in League of Legends is right-skewed, with 
 ![Win Rate by Region](Win%20Rate%20by%20Region.png)
 The plot demonstrates a strong regional imbalance in League of Legends esports, with Korea and China achieving dominant win rates well above 50%, while most minor regions fall significantly below the global average when competing internationally.
 
-![Average Kills by Position and Region](pivot_table.png)
+<img src="pivot_table.png" alt="Average Kills by Position and Region" width="700">
 This pivot table shows the average number of kills per game for each position across regions. As expected, Supports have the lowest kill averages, while Mid and Bot carry roles have the highest. However, we also observe regional variation within the same position, suggesting that playstyle differences across regions may influence our classification model’s performance and fairness.
 
 ---
@@ -225,8 +225,6 @@ Understanding these mechanisms allowed us to:
 * Avoid inappropriate row deletion
 * Interpret model results without bias introduced by systematic missingness
 
-<img src="missingness.png" alt="Missingness" width="700">
-
 ---
 
 ## Hypothesis Testing
@@ -239,9 +237,10 @@ By isolating **535 international clashes** from the 2022 season, we test the nul
 
 #### **Hypothesis Framework**
 
-* **Null Hypothesis:** The probability of winning a cross-region match is independent of a team's home region.
-* **Alternative Hypothesis:** The probability of winning a cross-region match depends on a team's home region.
-* **Test-Statistic:** **Chi-Square Statistic**
+* **Null Hypothesis (H₀):** The probability of winning a cross-region match is independent of a team's home region.
+* **Alternative Hypothesis (H₁):** The probability of winning a cross-region match depends on a team's home region.
+* **Test-Statistic:** **Chi-Square Statistic** for win rate by region
+* **Significance Level:** α = 0.05
     * *Rationale:* We are testing the association between two **categorical variables** (Home Region and Match Result).
 
 Our Chi-Square test returned a p-value below 0.05, indicating that we should reject the null hypothesis and conclude that region does influence win rate.
@@ -336,9 +335,19 @@ The best parameters were **n_estimators = 200 and max_depth = None.** The final 
 ## Fairness Analysis
 
 #### **Fairness Question**
-> Does the model perform equally well for players from different regions?
+> Does our final classification model perform worse for players from certain regions than for others?
 
-### Performance Metrics by Region
+Because our prediction task is **multiclass classification**, we evaluate fairness using Macro Recall, which measures how well the model identifies each position equally. Macro Recall is appropriate here because it weights all five positions equally and prevents dominant roles from masking poor performance in others.
+
+### Group Definition
+
+We define our groups based on the region column.
+* Group X: Players from Region A
+* Group Y: Players from all other regions
+
+We repeat this comparison across regions to evaluate overall disparities.
+
+### Observed Performance by Region
 
 The table below displays the Accuracy, Macro Recall and Macro Precision by Region, giving us an indication of how well our model performs on the whole at a Region level.
 
@@ -361,25 +370,29 @@ The table below displays the Accuracy, Macro Recall and Macro Precision by Regio
 Accuracy gap: 0.1306
 Macro Recall gap: 0.1284
 
-The Accuracy gap of 0.1306 and Macro Recall gap of 0.1284 indicate that the model performs differently depending on region.
+The largest observed *Macro Recall gap* across regions is approximately *0.128*, indicating noticeable variation in performance.
 
 This is further demonstrated at a position level in the following graph, where we can see the recall gap is particularly large for the Mid position.
 
 <img src="regional_recall_gap_by_position.png" alt="Regional Recall Gap by Position" width="700">
 
-### Testing for Fairness
+### Hypothesis Test for Regional Fairness
 
-To validate that the difference in model performance by region is statistically significant, we tested two sets of hypotheses.
+To determine whether these differences are statistically significant, we conducted a hypothesis test.
 
 * **Null Hypothesis:** The Accuracy of our model is consistent across regions.
 * **Alternative Hypothesis:** The accuracy of our model is inconsistent for at least one region.
-* **Test-Statistic:** **Chi-Square Statistic**
+* **Test-Statistic:** **Chi-Square Statistic**, Accuracy by region
+* **Significance Level:** α = 0.05
 
 Chi-square statistic: 765.77; p-value: 0.00
 
+The p-value is below 0.05, indicating that we should reject the null hypothesis and conclude that accuracy differs by region.
+
 * **Null Hypothesis:** The Accuracy of our model is consistent across regions for the Mid position in particular.
 * **Alternative Hypothesis:** The accuracy of our model is inconsistent at predicting the Mid position for at least one region.
-* **Test-Statistic:** **Chi-Square Statistic**
+* **Test-Statistic:** **Chi-Square Statistic**, Accuracy by region for the Mid position
+* **Significance Level:** α = 0.05
 
 Mid Recall Chi-square: 523.38; Mid Recall p-value: 0.00
 
