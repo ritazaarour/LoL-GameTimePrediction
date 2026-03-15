@@ -223,21 +223,6 @@ Understanding these mechanisms allowed us to:
 * Avoid inappropriate row deletion
 * Interpret model results without bias introduced by systematic missingness
 
-
-The url column (missing ~87% of rows) contains links to match VODs. While its missingness correlates with league (some leagues have urls more than others), this correlation alone does not make it MAR. The missingness is ultimately driven by an unobserved variable — whether a league or tournament organizer has a VOD publication policy — which is not captured anywhere in the dataset. The absence of a url is informative about the value itself: a match without a url is one that was never recorded or published, and that fact is tied to something inherent about the match (its league's media infrastructure), not just to observed columns. This makes url NMAR.
-
-To make this MAR, additional data that could explain the missingness includes:
-
-- League media policy data — a column indicating whether each league officially publishes VODs (yes/no). If missingness is fully explained by this flag, it becomes MAR.
-- Tournament tier/region — a structured classification of leagues by region and competitive tier (e.g., major vs. minor region), which may proxy for VOD availability.
-- Broadcast platform — knowing whether a match was streamed on Twitch, YouTube, or a regional platform (or not at all) would directly explain why no url exists.
-
-If any of these variables were added to the dataset and fully accounted for the missingness pattern in url, the mechanism would shift from NMAR to MAR — because the missingness would then be explainable by observed data rather than the unrecorded value itself.  
-
-From our permutation test, we found that the missing values in the url column do not appear to occur completely at random. When we compared the distribution of game length for matches where the url value is missing versus when it is present, we noticed that the two groups show different patterns. The observed difference in our test statistic was larger than what we typically saw in the permutation distribution under the null hypothesis. Because of this, the resulting p-value was small, which led us to reject the null hypothesis that missingness in the url column is independent of game characteristics.
-
-In simpler terms, this suggests that whether the url value is missing may be related to other variables in the dataset rather than happening randomly. This means the missingness is likely closer to Missing at Random (MAR) instead of Missing Completely at Random (MCAR). This is important for our project because it tells us that we should be careful when handling missing values. If we simply drop rows with missing values, we might unintentionally introduce bias into our analysis. Understanding the pattern of missingness helps us make better decisions about how to handle the data as we continue exploring regional performance and building our prediction models.
-
 <img src="missingness.png" alt="Missingness" width="700">
 
 ---
