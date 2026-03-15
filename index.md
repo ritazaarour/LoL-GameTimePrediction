@@ -19,7 +19,7 @@ For readers of this website, this project illustrates how **raw gameplay data ca
 #### **Dataset Summary**
 > 124,150 rows and 165 columns
 
-### Relevant Coulmns and Their Descriptions.
+### Relevant Columns and Their Descriptions
 
 | Column Name | Description |
 |------------|------------|
@@ -76,7 +76,7 @@ For readers of this website, this project illustrates how **raw gameplay data ca
 | `csat15` | Total creep score at 15 minutes. |
 | `opp_goldat15` | Lane opponent's total gold earned by the player at 15 minutes |
 | `opp_xpat15` | Lane opponent's total XP at 15 minutes. |
-| `opp_ csat15` | Lane opponent's total creep score at 15 minutes; indicates early lane or jungle farming patterns. |
+| `opp_csat15` | Lane opponent's total creep score at 15 minutes; indicates early lane or jungle farming patterns. |
 | `killsat15` | Player's kills at 15 minutes. |
 | `assistsat15` | Player's assists at 15 minutes. |
 | `deathsat15` | Player's deaths at 15 minutes. |
