@@ -125,6 +125,7 @@ To prepare this information for modeling, we performed a multi-step **Explorator
 By the end of this preprocessing phase, we moved from raw CSV rows to a refined, region-aware dataset ready to help us tackle problems like classifying player roles or predicting match outcomes based on regional trends.
 
 df_players.head()
+
 |index|position|side|kills|assists|deaths|total cs|cspm|monsterkillsownjungle|damagetochampions|damageshare|visionscore|controlwardsbought|goldat10|csat10|
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 |0|top|Blue|2|2|3|231\.0|8\.0911|NaN|15768\.0|0\.278784|26\.0|5\.0|3228\.0|89\.0|
@@ -134,6 +135,7 @@ df_players.head()
 |4|sup|Blue|1|6|5|42\.0|1\.4711|NaN|3663\.0|0\.0647631|69\.0|11\.0|2678\.0|16\.0|
 
 df_cross.head()
+
 |index|gameid|league|teamname|result|region|home\_region|
 |---|---|---|---|---|---|---|
 |262|NA1\_4170925713|PGC|Goose Gaming|false|Asia-Pacific|Asia-Pacific|
