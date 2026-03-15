@@ -191,6 +191,8 @@ We test whether missingness of turretplates depends on gamelength.
 
 The observed difference in mean game length was larger than most values in the permutation distribution, producing a p‑value < 0.05. We reject the null hypothesis and conclude that missingness in turretplates depends on game length. This provides evidence that turretplates is Missing At Random (MAR) with respect to observed variables.
 
+<img src="missingness_turretplates.png" alt="Missingness" width="700">
+
 #### Case 2: No Dependency on Side
 
 We also tested whether missingness of turretplates depends on side (Blue vs Red).
