@@ -284,7 +284,7 @@ P-value: 0.00
 ---
 
 ## Framing a Prediction Problem
-We are solving a **multiclass classification** task where we predict a player's position (top, jng, mid, bot, sup) based on their post-game statistics. We chose **position** as our target variable because each position has a relatively different gaming style that is reflected in their post-game stats.
+We are solving a **multiclass classification** task where we predict a player's position (top, jng, mid, bot, sup) based on their post-game statistics. We chose **position** as our target variable because each position has a relatively different gaming style that is reflected in their post-game stats. At the time of prediction, all post-game statistics are known, and we do not use the true position or any variables derived from it.
 
 We evaluate our model using **accuracy, precision, recall, and F1-score** together. _Accuracy_ gives us an overall measure of correctness and is appropriate here since the five positions are perfectly balanced in the dataset. We also report _precision, recall, and F1-score_ on a per-role basis. This allows us to identify which specific positions the model struggles to classify and where it performs well, giving us a more complete picture of model performance than any single metric alone.
 
@@ -319,7 +319,7 @@ We tuned two hyperparameters using GridSearchCV with 5-fold cross validation acr
 > * **n_estimators** (100, 200): Controls the number of trees in the forest. More trees improves stability and reduces variance in predictions.
 > * **max_depth** (None, 10, 20): Controls how deep each tree can grow. Unlimited depth allows the model to learn complex patterns while fixed depths act as regularization against overfitting.
 
-The best parameters were **n_estimators = 200 and max_depth = None.** The final model achieved **93.08% accuracy**. While overall accuracy is comparable to the baseline, the Random Forest showed some improvement. Jungle and support remained perfectly classified with precision and recall at or near 1.00. Bot showed a slight improvement in recall from 0.96 to 0.97 compared to the baseline. Mid achieved precision of 0.85 and recall of 0.83, and top achieved precision of 0.84 and recall of 0.87.
+The best parameters were **n_estimators = 200 and max_depth = None.** The final model achieved **93.08% accuracy**. While overall accuracy is comparable to the baseline, the Random Forest allowed us to explore nonlinear structure and evaluate whether engineered features meaningfully impact role-specific performance. Jungle and support remained perfectly classified with precision and recall at or near 1.00. Bot showed a slight improvement in recall from 0.96 to 0.97 compared to the baseline. Mid achieved precision of 0.85 and recall of 0.83, and top achieved precision of 0.84 and recall of 0.87.
 
 | Position | Precision | Recall | F1-Score | Support |
 |----------|-----------|--------|----------|---------|
