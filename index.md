@@ -390,6 +390,8 @@ To evaluate whether our model performs equally across regions, we conducted a pe
 
 **Results**
 
+![Fairness Permutation Graph](fairness_permutation.png)
+
 * Observed Recall Gap: 0.128
 * Permutation p-value: < 0.001
 
