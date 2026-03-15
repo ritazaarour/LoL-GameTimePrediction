@@ -376,29 +376,31 @@ This is further demonstrated at a position level in the following graph, where w
 
 <img src="regional_recall_gap_by_position.png" alt="Regional Recall Gap by Position" width="700">
 
-### Hypothesis Test for Regional Fairness
+#### Permutation Test for Regional Fairness
 
-To determine whether these differences are statistically significant, we conducted a hypothesis test.
+To evaluate whether our model performs equally across regions, we conducted a permutation test comparing Macro Recall.
 
-* **Null Hypothesis:** The Accuracy of our model is consistent across regions.
-* **Alternative Hypothesis:** The accuracy of our model is inconsistent for at least one region.
-* **Test-Statistic:** **Chi-Square Statistic**, Accuracy by region
+**Hypothesis Framework**
+
+* **Null Hypothesis (H₀):** The model is fair across regions. Any observed differences in Macro Recall are due to random variation.
+* **Alternative Hypothesis (H₁):** The model is not fair. At least one region has systematically different Macro Recall.
+* **Test Statistic:** Difference between the maximum and minimum regional Macro Recall.
 * **Significance Level:** α = 0.05
+* **Method:** 1000 permutations of region labels while keeping model predictions fixed.
 
-Chi-square statistic: 765.77; p-value: 0.00
+**Results**
 
-The p-value is below 0.05, indicating that we should reject the null hypothesis and conclude that accuracy differs by region.
+* Observed Recall Gap: 0.128
+* Permutation p-value: < 0.001
 
-* **Null Hypothesis:** The Accuracy of our model is consistent across regions for the Mid position in particular.
-* **Alternative Hypothesis:** The accuracy of our model is inconsistent at predicting the Mid position for at least one region.
-* **Test-Statistic:** **Chi-Square Statistic**, Accuracy by region for the Mid position
-* **Significance Level:** α = 0.05
+The observed recall gap of approximately 12.8 percentage points was larger than all values generated under permutation. Since the p-value is below 0.05, we reject the null hypothesis.
 
-Mid Recall Chi-square: 523.38; Mid Recall p-value: 0.00
+> We conclude that model performance differs significantly across regions.
 
-Both p-values are well below a threshold of 0.05, so we reject both null hypotheses. This means that there is a difference in model performance by region and we reject the null hypothsis. We also see a signficant difference in predictions for the Mid position, so we reject that null hypothesis and conclude that our model performs differently across regions for the Mid position.
+Because the model itself was not retrained during permutation and only region labels were shuffled, this result reflects a genuine disparity in predictive performance rather than random variation.
 
-#### Fairness Conclusion
-Although overall regional performance disparities exist, the fairness issue is highly concentrated in the Mid role, which exhibits a recall disparity of 36.8 percentage points across regions. In contrast, Jungle and Support are relatively stable, suggesting that the model’s fairness issues are role-specific rather than universally distributed. The differences in overall recall and recall for the Mid position are statistically significant.
+**Fairness Conclusion**
+
+Overall, our permutation test provides strong evidence that the model’s predictive performance is not uniform across regions. The observed Macro Recall gap of approximately 12.8 percentage points is substantially larger than what would be expected under random variation (p < 0.001), indicating statistically significant disparities in how well the model identifies player positions across different regional contexts. While overall accuracy remains high, this analysis shows that performance differences are concentrated in specific regions and roles rather than evenly distributed. Importantly, these results do not imply intentional bias, but instead highlight that regional playstyle differences and underlying statistical distributions may affect how well the model generalizes. Recognizing these disparities is essential for interpreting our classifier responsibly and for guiding future improvements aimed at achieving more equitable performance across groups.
 
 ---
